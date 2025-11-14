@@ -1,0 +1,75 @@
+# ---------------------------------------------------
+# GLOBAL IGNORE FOR BACKEND + FRONTEND MONOREPO
+# (Angular + NestJS)
+# ---------------------------------------------------
+
+### NODE / NPM
+node_modules/
+**/node_modules/
+
+### DIST / BUILD OUTPUT
+dist/
+build/
+**/dist/
+**/build/
+
+### ANGULAR SPECIFIC
+.angular/
+.angular/cache/
+
+### NESTJS SPECIFIC
+**/coverage/
+.nyc_output/
+
+### ENVIRONMENT FILES (VERY IMPORTANT)
+.env
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+**/.env.*.local
+
+### LOGS
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+### OS FILES
+.DS_Store
+Thumbs.db
+
+### IDE / EDITOR FILES
+.idea/
+.vscode/
+.vscode/*
+
+# Allow VSCode recommended settings files
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### TEMP / CACHE
+.tmp/
+.temp/
+*.tmp
+*.temp
+
+### LOCK FILES
+*.pid
+*.seed
+*.pid.lock
+
+### DIAGNOSTIC REPORTS
+report.*.json
+
+### OPTIONAL: DOCKER
+docker-compose.override.yml
+**/docker-data/
+
+### OPTIONAL: TESTS
+**/test-output/
+**/jest-stare/
