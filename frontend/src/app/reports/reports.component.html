@@ -1,0 +1,122 @@
+
+<div class="dashboard-container">
+  <div class="main-card">
+    <div class="main-card-header">Izveštaj proizvodnje</div>
+
+   
+    <div class="task-form">
+      <div class="form-field">
+        <label>Početak</label>
+        <input type="date" [(ngModel)]="startDate" />
+      </div>
+
+      <div class="form-field">
+        <label>Kraj</label>
+        <input type="date" [(ngModel)]="endDate" />
+      </div>
+
+      <div class="form-field full-width">
+        <label style="visibility:hidden">dugme</label>
+        <button class="submit-btn" (click)="generateReport()" [disabled]="loading">
+          {{ loading ? 'Učitavanje...' : 'Generiši izveštaj' }}
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="error" style="color: #c82333; margin-bottom: 1rem;">{{ error }}</div>
+
+    
+    <div *ngIf="report">
+      <div style="display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+        <div>
+          <strong>Period:</strong>
+          {{ report.period.startDate | date:'mediumDate' }} — {{ report.period.endDate | date:'mediumDate' }}
+        </div>
+
+     
+        <div class="stats-grid" style="width:auto; margin-top:0;">
+          <mat-card class="stat-card">
+            <div class="stat-title">Ukupno zadataka</div>
+            <div class="stat-value">{{ report.summary.totalTasks }}</div>
+          </mat-card>
+
+          <mat-card class="stat-card">
+            <div class="stat-title">Planirano</div>
+            <div class="stat-value">{{ report.summary.planned }}</div>
+          </mat-card>
+
+          <mat-card class="stat-card">
+            <div class="stat-title">U toku</div>
+            <div class="stat-value">{{ report.summary.inProgress }}</div>
+          </mat-card>
+
+          <mat-card class="stat-card">
+            <div class="stat-title">Završeno</div>
+            <div class="stat-value">{{ report.summary.completed }}</div>
+          </mat-card>
+
+          <mat-card class="stat-card">
+            <div class="stat-title">Kašnjenja</div>
+            <div class="stat-value">{{ report.summary.delayed }}</div>
+          </mat-card>
+
+          <mat-card class="stat-card">
+            <div class="stat-title">Kašnjenje %</div>
+            <div class="stat-value">{{ report.summary.delayedPercentage }}</div>
+          </mat-card>
+        </div>
+      </div>
+
+     
+      <div class="report-section">
+        <div *ngFor="let t of report.tasks" class="task-block">
+          <div class="task-header">
+           <div><strong>Zadatak: </strong>ID: {{ t.id }}, {{ t.name }}</div>
+            <span class="muted"> — Prioritet {{ t.priority }} — {{ fmtStatus(t.status) }}</span>
+            <span class="delay" [ngClass]="{'delayed-yes': t.delayDays>0}">
+              {{ delayedLabel(t) }}
+            </span>
+          </div>
+
+          <div class="task-body">
+              <div> <strong>Proizvedeno/Ukupno proizvoda: </strong>{{ t.produced| number:'1.2-2' }}/{{ t.totalProducts }}</div>
+    
+            <div><strong>Planiran početak - kraj:</strong> {{ fmtDate(t.plannedStart) }} — {{ fmtDate(t.plannedEnd) }}</div>
+            <div *ngIf="t.method"><strong>Metoda: </strong> {{ t.method }}</div>
+
+            <div class="subsection">
+              <div class="sub-title">👷 Radnici:</div>
+              <div *ngIf="t.workers.length === 0" class="muted">Nema dodeljenih radnika</div>
+              <ul *ngIf="t.workers.length>0">
+                <li *ngFor="let w of t.workers">
+                  ID: {{ w.id }}, {{ w.name }} 
+                </li>
+              </ul>
+            </div>
+
+            <div class="subsection">
+              <div class="sub-title">⚙️ Mašine:</div>
+              <div *ngIf="t.machines.length === 0" class="muted">Nema dodeljenih mašina</div>
+              <ul *ngIf="t.machines.length>0">
+                <li *ngFor="let m of t.machines">
+                 ID: {{  m.id }}, {{ m.name }} 
+                </li>
+              </ul>
+            </div>
+            <div class="subsection">
+              <div class="sub-title">📦 Materijali:</div>
+              <div *ngIf="t.materials.length===0" class="muted">Nema dodeljenih materijala</div>
+              <ul *ngIf="t.materials.length>0">
+                <li *ngFor="let m of t.materials">
+                 ID: {{  m.id }}, {{ m.name }}, Količina: {{ m.used }}, Cena: {{ m.price }} 
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!report && !loading" style="margin-top:1rem; color:#666;">Nije generisan izveštaj.</div>
+  </div>
+</div>

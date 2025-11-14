@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<div mat-dialog-content [innerHTML]="data.message"></div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="yes()">Da</button>
+    <button mat-button color="warn" (click)="no()">Ne</button>
+</div>

@@ -1,0 +1,103 @@
+<div class="dashboard-container">
+  <div class="main-card">
+    <div class="main-card-header">Radnici</div>
+
+ 
+    <div class="add-form">
+      <div class="form-field">
+        <label>Naziv</label>
+        <input type="text" [(ngModel)]="newWorker.name" />
+      </div>
+
+          <div class="form-field">
+        <label>Tip</label>
+        <input type="text" [(ngModel)]="newWorker.type"  />
+      </div>
+
+
+      <div class="form-field">
+        <label>Nivo veštine</label>
+        <input type="number" [(ngModel)]="newWorker.skillLevel" min="1" max="2" />
+      </div>
+
+      <div class="form-field checkbox-field">
+        <label>
+          Dostupnost
+          <input type="checkbox" [(ngModel)]="newWorker.availability" />
+        </label>
+      </div>
+
+      <div class="form-field">
+        <label>Dnevni kapacitet</label>
+        <input type="number" [(ngModel)]="newWorker.capacityPerDay" />
+      </div>
+
+      <div class="form-field">
+        <label>Prekovremeni sati</label>
+        <input type="number" [(ngModel)]="newWorker.maxOvertimeHours" />
+      </div>
+
+      <div class="form-field">
+        <label>Dnevnica</label>
+        <input type="number" [(ngModel)]="newWorker.hourlyRate" step="0.01" />
+      </div>
+
+      <div class="form-field">
+        <label>Dnevnica vikendom</label>
+        <input type="number" [(ngModel)]="newWorker.weekendHourlyRate" step="0.01" />
+      </div>
+
+      <div class="form-field">
+        <label>Dnevnica prekovremeno</label>
+        <input type="number" [(ngModel)]="newWorker.overTimeHourlyRate" step="0.01" />
+      </div>
+
+      <div class="form-field full-width">
+        <button (click)="addWorker()">Dodaj radnika</button>
+      </div>
+    </div>
+
+<div class="table-wrapper">
+    <table class="workers-table" *ngIf="workers && workers.length; else noData">
+      <thead>
+        <tr>
+            <th>ID</th>
+          <th>Naziv</th>
+          <th>Tip</th>
+          <th>Nivo veštine</th>
+          <th>Dostupnost</th>
+          <th>Dnevni kapacitet</th>
+          <th>Prekovremeni sati</th>
+          <th>Dnevnica</th>
+          <th>Dnevnica vikendom</th>
+          <th>Dnevnica prekovremeno</th>
+          <th>Akcija</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let worker of workers">
+             <td><input type="text" [(ngModel)]="worker.id" /></td>
+          <td><input type="text" [(ngModel)]="worker.name" /></td>
+                    <td><input type="text" [(ngModel)]="worker.type" /></td>
+          <td><input type="number" [(ngModel)]="worker.skillLevel" min="1" max="5" /></td>
+          <td><input type="checkbox" [(ngModel)]="worker.availability" /></td>
+          <td><input type="number" [(ngModel)]="worker.capacityPerDay" /></td>
+          <td><input type="number" [(ngModel)]="worker.maxOvertimeHours" /></td>
+          <td><input type="number" [(ngModel)]="worker.hourlyRate" step="0.01" /></td>
+          <td><input type="number" [(ngModel)]="worker.weekendHourlyRate" step="0.01" /></td>
+          <td><input type="number" [(ngModel)]="worker.overTimeHourlyRate" step="0.01" /></td>
+          <td>
+  <button class="save-btn" (click)="save(worker)">Sačuvaj</button>
+  <button class="delete-btn" (click)="delete(worker)">Izbriši</button>
+</td>
+
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <ng-template #noData>
+      <p>Nema dostupnih radnika.</p>
+    </ng-template>
+  </div>
+</div>

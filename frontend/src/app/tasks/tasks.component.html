@@ -1,0 +1,162 @@
+<div class="dashboard-container tasks-container">
+  <div class="main-card">
+    <div class="main-card-header">Zadaci</div>
+
+   
+    <div class="add-form task-form">
+      <div class="form-field">
+        <label>Naziv</label>
+        <input type="text" [(ngModel)]="newTask.name" />
+      </div>
+
+          <div class="form-field">
+        <label>Tip</label>
+        <input type="text" [(ngModel)]="newTask.type" />
+      </div>
+
+      <div class="form-field">
+        <label>Opis</label>
+        <input type="text" [(ngModel)]="newTask.description" />
+      </div>
+
+      <!-- <div class="form-field">
+        <label>Stanje</label>
+        <input type="text" [(ngModel)]="newTask.status" />
+      </div> -->
+
+      <div class="form-field">
+        <label>Krajnji rok</label>
+        <input type="date" [(ngModel)]="newTask.deadline" />
+      </div>
+
+      <div class="form-field">
+        <label>Prioritet</label>
+        <input type="number" [(ngModel)]="newTask.priority" />
+      </div>
+
+      <div class="form-field">
+        <label>Totalni trošak</label>
+        <input type="number" [(ngModel)]="newTask.totalCost" />
+      </div>
+
+      <div class="form-field">
+        <label>Cena po proizvodu</label>
+        <input type="number" [(ngModel)]="newTask.pricePerProduct" />
+      </div>
+
+      <div class="form-field">
+        <label>Novčani dobitak</label>
+        <input type="number" [(ngModel)]="newTask.revenue" />
+      </div>
+
+      <div class="form-field">
+        <label>Ukupno proizvoda</label>
+        <input type="number" [(ngModel)]="newTask.totalProducts" />
+      </div>
+
+      <div class="form-field">
+        <label>Proizvedeno proizvoda</label>
+        <input type="number" [(ngModel)]="newTask.producedProducts" />
+      </div>
+
+      <div class="form-field">
+        <label>Sati po proizvodu</label>
+        <input type="number" [(ngModel)]="newTask.hoursPerProduct" />
+      </div>
+
+      <div class="form-field">
+        <label>Kašnjenje u danima</label>
+        <input type="number" [(ngModel)]="newTask.delayDays" />
+      </div>
+
+      <div class="form-field">
+        <label>Metoda ID</label>
+        <input type="number" [(ngModel)]="newTask.methodId" />
+      </div>
+
+      <div class="form-field full-width materials-section" *ngFor="let mat of newTask.materials; let i = index">
+        <label>Materijal {{ i + 1 }}</label>
+        <div class="material-item">
+          <input type="text" [(ngModel)]="mat.name" />
+          <input type="number" [(ngModel)]="mat.quantity" />
+          <button (click)="newTask.materials?.splice(i, 1)">Izbriši</button>
+        </div>
+      </div>
+
+      <div class="form-field full-width">
+        <button class="add-material-btn" (click)="addMaterialToTask(newTask)">+ Dodaj materiajal</button>
+      </div>
+
+      <div class="form-field full-width">
+        <button class="submit-btn" (click)="addTask()">Dodaj zadatak</button>
+      </div>
+    </div>
+
+<div class="table-wrapper">
+    <table class="tasks-table" *ngIf="tasks && tasks.length; else noData">
+      <thead>
+        <tr>
+            <th>ID</th>
+          <th>Naziv</th>
+          <th>Tip</th>
+          <th>Opis</th>
+          <th>Stanje</th>
+          <th>Krajnji rok</th>
+          <th>Prioritet</th>
+          <th>Totalni trošak</th>
+          <th>Cena po proizvodu</th>
+          <th>Novčani dobitak</th>
+          <th>Ukupno proizvoda</th>
+          <th>Proizvedeno proizvoda</th>
+          <th>Sati po proizvodu</th>
+          <th>Kašnjenje u danima</th>
+          <th>Metoda ID</th>
+          <th>Materijali</th>
+          <th>Akcija</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let task of tasks">
+             <td><input type="text" [(ngModel)]="task.id" /></td>
+          <td><input type="text" [(ngModel)]="task.name" /></td>
+                    <td><input type="text" [(ngModel)]="task.type" /></td>
+          <td><input type="text" [(ngModel)]="task.description" /></td>
+         <td>
+  <input type="text" [value]="translateStatus(task.status)" readonly />
+</td>
+
+          <td><input type="date" [(ngModel)]="task.deadline" /></td>
+          <td><input type="number" [(ngModel)]="task.priority" /></td>
+          <td><input type="number" [(ngModel)]="task.totalCost" /></td>
+          <td><input type="number" [(ngModel)]="task.pricePerProduct" /></td>
+          <td><input type="number" [(ngModel)]="task.revenue" /></td>
+          <td><input type="number" [(ngModel)]="task.totalProducts" /></td>
+          <td><input type="number" [(ngModel)]="task.producedProducts" /></td>
+          <td><input type="number" [(ngModel)]="task.hoursPerProduct" /></td>
+          <td><input type="number" [(ngModel)]="task.delayDays" /></td>
+          <td><input type="number" [(ngModel)]="task.methodId" /></td>
+
+          <td class="materials-section">
+            <div class="material-item" *ngFor="let mat of task.materials; let i = index">
+              <input type="text" [(ngModel)]="mat.name"  />
+              <input type="number" [(ngModel)]="mat.quantity" />
+              <button (click)="removeMaterialFromTask(task, i)">Izbriši</button>
+            </div>
+            <button class="add-material-btn" (click)="addMaterialToTask(task)">+ Dodaj materijal</button>
+          </td>
+
+          <td>
+            <button class="save-btn" (click)="save(task)">Sačuvaj</button>
+            <button class="delete-btn" (click)="delete(task)">Izbriši</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <ng-template #noData>
+      <p>Nema dostupnih zadataka.</p>
+    </ng-template>
+  </div>
+</div>

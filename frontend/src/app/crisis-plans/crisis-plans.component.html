@@ -1,0 +1,46 @@
+<div class="dashboard-container">
+  <div class="main-card">
+    <div class="main-card-header">Krizni planovi</div>
+
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let plan of crisisPlans">
+        <div class="stat-title">{{ plan.description }}</div>
+
+
+<div class="stat-desc">
+  <label>Trenutni uslov okidanja: </label>
+
+  
+  <div class="stat-desc">
+  
+   <ng-container [ngSwitch]="plan.action">
+  <span *ngSwitchCase="'notify'"><b>budžet &lt; {{ plan.tempTriggerNumber }}</b></span>
+  <span *ngSwitchCase="'unblock-by-budget'"><b>budžet &gt; {{ plan.tempTriggerNumber }}</b></span>
+  <span *ngSwitchCase="'block-by-budget'"><b>budžet &lt; {{ plan.tempTriggerNumber }}</b></span>
+  <span *ngSwitchCase="'block-by-delayed'"><b>metoda = 4 & kašnjenje &gt; {{ plan.tempTriggerNumber }} dana</b></span>
+  <span *ngSwitchDefault><b>{{ plan.tempTriggerNumber }}</b></span>
+</ng-container>
+
+  </div>
+
+ 
+  <input type="number" [(ngModel)]="plan.tempTriggerNumber" />
+</div>
+<div class="stat-desc">
+  Akcija:
+  <ng-container [ngSwitch]="plan.action">
+    <span *ngSwitchCase="'notify'">Obaveštenje</span>
+    <span *ngSwitchCase="'unblock-by-budget'">Odblokiranje zbog budžeta</span>
+    <span *ngSwitchCase="'block-by-budget'">Blokiranje zbog budžeta</span>
+    <span *ngSwitchCase="'block-by-delayed'">Blokiranje zbog kašnjenja</span>
+    <span *ngSwitchDefault>{{ plan.action }}</span> 
+  </ng-container>
+</div>
+
+
+
+        <button class="save-btn" (click)="save(plan)">Sačuvaj</button>
+      </div>
+    </div>
+  </div>
+</div>

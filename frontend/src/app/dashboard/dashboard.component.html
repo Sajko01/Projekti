@@ -1,0 +1,29 @@
+
+
+<div class="dashboard-container">
+
+  <div class="main-card">
+    <div class="main-card-header">
+      Kontrolna tabla
+    </div>
+
+    <div class="stats-grid">
+
+      <mat-card class="stat-card" *ngFor="let stat of stats">
+        <div class="stat-title">{{ stat.label }}</div>
+        <div class="stat-value">{{ stat.value }}</div>
+      </mat-card>
+    </div>
+
+
+   <div class="diagram-title"> Dijagram rada 5M softvera</div>
+
+
+<div class="diagram-wrapper">
+
+   
+  <img src="assets/5Mmodel5.svg" alt="Sistemski dijagram" class="diagram-image">
+</div>
+
+  </div>
+</div>

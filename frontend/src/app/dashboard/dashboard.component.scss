@@ -1,0 +1,78 @@
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 2rem;
+}
+
+.main-card {
+  width: 90%;
+  max-width: 1200px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.main-card-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.stat-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+
+.diagram-wrapper {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.diagram-image {
+  max-width: 85%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease-in-out;
+}
+
+.diagram-image:hover {
+  transform: scale(1.1);
+}
+
+
+.diagram-title {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 5rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+  letter-spacing: 0.5px;
+}

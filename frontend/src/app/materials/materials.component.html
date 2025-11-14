@@ -1,0 +1,54 @@
+
+<div class="dashboard-container">
+  <div class="main-card">
+    <div class="main-card-header">Materijali</div>
+
+
+    <div class="add-form">
+      <div class="form-field">
+        <label for="name">Naziv</label>
+        <input id="name" type="text" [(ngModel)]="newMaterial.name"  />
+      </div>
+
+      <div class="form-field">
+        <label for="quantity">Količina</label>
+        <input id="quantity" type="number" [(ngModel)]="newMaterial.quantityAvailable" placeholder="Enter quantity" />
+      </div>
+
+      <div class="form-field">
+        <label for="price">Cena</label>
+        <input id="price" type="number" [(ngModel)]="newMaterial.price" placeholder="Enter price" />
+      </div>
+
+      <div class="form-field">
+        <label for="unit">Jedinica</label>
+        <input id="unit" type="text" [(ngModel)]="newMaterial.unit" />
+      </div>
+
+      <button class="add-btn" (click)="addMaterial()">Dodaj materijal</button>
+    </div>
+
+
+
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let material of materials">
+        <div class="stat-title">{{ material.name }}</div>
+
+        <div class="stat-field">
+          <label>Količina</label>
+          <input type="number" [(ngModel)]="material.quantityAvailable" />
+        </div>
+
+        <div class="stat-field">
+          <label>Cena</label>
+          <input type="number" [(ngModel)]="material.price" />
+        </div>
+
+        <div class="stat-desc">Jedinica: {{ material.unit }}</div>
+
+        <button class="save-btn" (click)="save(material)">Sačuvaj</button>
+      </div>
+    </div>
+  </div>
+</div>
+

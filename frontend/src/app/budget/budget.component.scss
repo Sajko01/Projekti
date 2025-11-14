@@ -1,0 +1,64 @@
+.table-wrapper {
+  overflow-x: auto;
+}
+
+
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.main-card {
+  width: 95%;
+  max-width: 1300px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.main-card-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #333;
+  text-align: left;
+}
+
+.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    width: 100px;
+    padding: 0.3rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  button.save-btn {
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+
+    &:hover {
+      background-color: #218838;
+    }
+  }
+}

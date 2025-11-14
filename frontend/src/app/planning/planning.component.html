@@ -1,0 +1,110 @@
+<div class="dashboard-container tasks-container"> 
+  <div class="main-card">
+    <div class="main-card-header">Planiranje zadataka</div>
+
+
+    <div class="action-buttons">
+      <div class="left-section">
+        <div class="button-box">
+          <h4>Akcije zadataka</h4>
+          <button class="blue-btn" (click)="onScheduleTasks()">Raspodeli</button>
+          <button class="blue-btn" (click)="onAdaptiveSchedule()">Adaptivno raspodeli</button>
+          <button class="blue-btn" (click)="onRecalculateCosts()">Izračunaj</button>
+        </div>
+      </div>
+
+      <div class="right-section">
+
+
+        <div class="rccp-crisis-form">
+          <h3>Krizni plan</h3>
+          <h4>*** Najbolje posle konačne raspodele</h4>
+          <div class="form-field">
+            <label>Datum početka</label>
+            <input type="date" [(ngModel)]="crisisStart" />
+          </div>
+          <div class="form-field">
+            <label>Datum kraja</label>
+            <input type="date" [(ngModel)]="crisisEnd" />
+          </div>
+          <div class="buttons">
+            <button class="red-btn" (click)="onCrisis()">Krizni plan</button>
+          </div>
+        </div>
+
+
+        <div class="rccp-crisis-form">
+          <h3>RCCP test</h3>
+           <h4>*** Najbolje posle prve raspodele</h4>
+            <h4>*** Testiraj do krajnjeg roka</h4>
+          <div class="form-field">
+            <label>Datum početka</label>
+            <input type="date" [(ngModel)]="rccpStart" />
+          </div>
+          <div class="form-field">
+            <label>Datum kraja</label>
+            <input type="date" [(ngModel)]="rccpEnd" />
+          </div>
+          <div class="form-field">
+            <label>Prekovremeno</label>
+            <input type="checkbox" [(ngModel)]="overTime" />
+          </div>
+          <div class="form-field">
+            <label>Vikend</label>
+            <input type="checkbox" [(ngModel)]="weekend" />
+          </div>
+          <div class="buttons">
+            <button class="red-btn" (click)="onRCCP()">RCCP test</button>
+          </div>
+        </div>
+
+       
+      </div>
+    </div>
+
+
+    <div class="table-wrapper">
+      <table class="tasks-table" *ngIf="assignments && assignments.length; else noData">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Zadatak ID</th>
+            <th>Radnik ID</th>
+            <th>Mašina ID</th>
+            <th>Datum početka</th>
+            <th>Datum kraja</th>
+             <th>Akcije</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let a of assignments">
+            <td><input type="number" [(ngModel)]="a.id" readonly /></td>
+            <td><input type="number" [(ngModel)]="a.taskId" readonly /></td>
+            <td><input type="number" [(ngModel)]="a.workerId" readonly /></td>
+            <td><input type="number" [(ngModel)]="a.machineId" readonly /></td>
+            <td><input type="date" [(ngModel)]="a.startDate" readonly /></td>
+            <td><input type="date" [(ngModel)]="a.endDate" readonly /></td>
+            <td>
+
+          <button class="delete-btn" (click)="delete(a)">Izbriši</button>
+        </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="bottom-buttons">
+      <div class="left-buttons">
+        <h4>Ažuriranje</h4>
+        <button class="blue-btn" (click)="onUpdateProduction()">Dnevno ažuraranje proizvoda</button>
+        <button class="blue-btn" (click)="onUpdateDailyBudget()">Dnevno ažuriranje budžeta</button>
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <p>Nema dodeljenih zadataka.</p>
+    </ng-template>
+  </div>
+</div>

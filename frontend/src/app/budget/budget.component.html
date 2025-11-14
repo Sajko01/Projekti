@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+  <div class="main-card">
+    <div class="main-card-header">Budžet</div>
+
+    <div class="table-wrapper">
+    <table class="budget-table" *ngIf="budgets && budgets.length; else noData">
+      <thead>
+        <tr>
+          <th>Preostali budžet</th>
+          <th>Iskorićeno iz budžeta</th>
+          <th>Valuta</th>
+          <th>Akcija</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let budget of budgets">
+          
+          <td><input type="number" [(ngModel)]="budget.amountAllocated" /></td>
+          <td><input type="number" [(ngModel)]="budget.amountUsed" /></td>
+          <td><input type="text" [(ngModel)]="budget.currency" /></td>
+          <td>
+            <button class="save-btn" (click)="save(budget)">Sačuvaj</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <ng-template #noData>
+      <p>Nema dostupnog budžeta.</p>
+    </ng-template>
+  </div>
+</div>
